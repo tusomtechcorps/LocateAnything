@@ -546,13 +546,13 @@ class Locate_Anything_Admin
 			$already_displayed_tags =array();
 			  		
 			 foreach ( $post_types as $posttype =>$postTypeName ) {
-			 	if($postTypeName=="Users") $postTypeName = 'user';			 	
-			 	$markups = Locate_Anything_Public::getBasicMarkupList($postTypeName);
+			 	if($posttype=="Users") $posttype = 'user';			 	
+			 	$markups = Locate_Anything_Public::getBasicMarkupList($posttype);
 			 	foreach ($markups as $tag => $nothing) {	
 			 			if(in_array($tag,$already_displayed_tags))	continue;
 			 			array_push($already_displayed_tags,$tag);
 			 		?>
-					<div class='basic-markup basic-markup-<?php echo $postTypeName?>'><b><?php echo ucfirst(str_replace(array("|","_") , array(""," ") , $tag)) ?></b> : <?php echo $tag ?></div>
+					<div class='basic-markup basic-markup-<?php echo $posttype?>'><b><?php echo ucfirst(str_replace(array("|","_") , array(""," ") , $tag)) ?></b> : <?php echo $tag ?></div>
 				<?php }
 				} ?>
 				
@@ -667,7 +667,7 @@ class Locate_Anything_Admin
 		// get the json response
 		$resp_json = Locate_Anything_Tools::file_get_contents_curl($url);
 		// decode the json
-		$resp = json_decode($resp_json, true);		
+		$resp = json_decode($resp_json, true);
 		// response status will be 'OK', if able to geocode given address
 		if ($resp['status'] == 'OK') {
 			// get the important data

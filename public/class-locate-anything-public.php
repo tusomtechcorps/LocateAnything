@@ -196,8 +196,6 @@ class Locate_Anything_Public {
 						<div id="progress-wrapper">					
 						<div class="progress"  style="background-color:transparent" id="progress-'.$atts ["map_id"].'"><div class="progress-bar" id="progress-bar-'.$atts ["map_id"].'"></div></div>
 						</div></div>' . Locate_Anything_Public::generateMapJS ( $atts ["map_id"], "map-container-".$atts ["map_id"] );
-		// apply filters on outputMapMarkup
-		$content = apply_filters("locate_anything_alter_outputMapMarkup",$content);
 		return $content;
 	}
 	
@@ -381,7 +379,6 @@ class Locate_Anything_Public {
 					eval("var "+map_instance+"=new leaflet_filters_class(params);");				 
 						/* loading ... */						
 					 eval(map_instance).showLoader(true);
-					 <?php if (has_filter("locate_anything_beforeCreateMap")) echo apply_filters("locate_anything_beforeCreateMap",$map_id);?>
 					 	/* Initialize Map  */	
 					eval(map_instance).createMap();
 					/*   Register filters, property_name is the name of the property as shown in the JSON datas  */
@@ -444,7 +441,6 @@ class Locate_Anything_Public {
 							eval(map_instance).showLoader(false);	
 							/* stores the map in Jquery for easier access*/	
 							current_map=eval(map_instance)	;
-							<?php if (has_filter("locate_anything_afterGenerateJS")) echo apply_filters("locate_anything_afterGenerateJS",$map_id)?>
 							},250);
 					}
 
